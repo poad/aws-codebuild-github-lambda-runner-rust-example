@@ -34,3 +34,6 @@ jobs:
     - name: Build app
       run: |
         cargo build --release
+
+    - name: test
+      run: aws s3 ls
