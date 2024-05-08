@@ -1,0 +1,36 @@
+name: Build and Test
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+    - main
+
+  workflow_dispatch:
+    inputs:
+      env-name:
+        default: dev1
+        required: true
+
+jobs:
+  build-manual:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: codebuild-codebuild-gha-lambda-runner-example-rust-${{ inputs.env-name }}-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build app
+      run: |
+        cargo build --release
+
+  build:
+    if: ${{ github.event_name != 'workflow_dispatch' }}
+    runs-on: codebuild-codebuild-gha-lambda-runner-example-rust-dev1-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build app
+      run: |
+        cargo build --release
