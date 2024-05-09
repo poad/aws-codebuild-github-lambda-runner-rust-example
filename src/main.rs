@@ -1,3 +1,5 @@
+use log::{info};
+
 fn main() {
-    println!("Hello, world!");
+    info!("Hello, world!");
 }

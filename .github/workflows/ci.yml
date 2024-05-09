@@ -21,9 +21,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install dependencies
+      run: |
+        cargo install --path .
+
     - name: Build app
       run: |
-        cargo build --release
+        cargo build --release --frozen --offline
 
   build:
     if: ${{ github.event_name != 'workflow_dispatch' }}
@@ -31,9 +35,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Build app
+    - name: Install dependencies
+      env:
+        CARGO_INSTALL_ROOT: ./.cargo
+        CARGO_HOME: ./.cargo
       run: |
-        cargo build --release
+        cargo install --path .
+
+    - name: Build app
+      env:
+        CARGO_INSTALL_ROOT: ./.cargo
+        CARGO_HOME: ./.cargo
+      run: |
+        cargo build --release --offline
 
     - name: Install aws cli
       run: |
