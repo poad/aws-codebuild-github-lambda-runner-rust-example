@@ -22,12 +22,18 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install dependencies
+      env:
+        CARGO_INSTALL_ROOT: ./.cargo
+        CARGO_HOME: ./.cargo
       run: |
         cargo install --path .
 
     - name: Build app
+      env:
+        CARGO_INSTALL_ROOT: ./.cargo
+        CARGO_HOME: ./.cargo
       run: |
-        cargo build --release --frozen --offline
+        cargo build --release --offline
 
   build:
     if: ${{ github.event_name != 'workflow_dispatch' }}
