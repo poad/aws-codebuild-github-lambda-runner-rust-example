@@ -21,13 +21,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install dependencies
-      env:
-        CARGO_INSTALL_ROOT: ./.cargo
-        CARGO_HOME: ./.cargo
-      run: |
-        cargo install --path .
-
     - name: Build app
       env:
         CARGO_INSTALL_ROOT: ./.cargo
@@ -40,13 +33,6 @@ jobs:
     runs-on: codebuild-codebuild-gha-lambda-runner-example-rust-dev1-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install dependencies
-      env:
-        CARGO_INSTALL_ROOT: ./.cargo
-        CARGO_HOME: ./.cargo
-      run: |
-        cargo install --path .
 
     - name: Build app
       env:
