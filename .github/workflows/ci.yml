@@ -19,7 +19,7 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: codebuild-codebuild-gha-lambda-runner-example-rust-${{ inputs.env-name }}-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Build app
       env:
@@ -32,7 +32,7 @@ jobs:
     if: ${{ github.event_name != 'workflow_dispatch' }}
     runs-on: codebuild-codebuild-gha-lambda-runner-example-rust-dev1-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Build app
       env:
