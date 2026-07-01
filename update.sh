@@ -21,9 +21,8 @@ if [ $result -ne 0 ]; then
 fi
 echo ""
 pwd
-cargo update
-result=$?
-if [ $result -ne 0 ]; then
+
+if ! (cargo update); then
   cd "${CUR}" || exit
   exit $result
 fi
@@ -34,9 +33,8 @@ if [ $result -ne 0 ]; then
   cd "${CUR}" || exit
   exit $result
 fi
-git commit -am "Bumps crates" && git push
-result=$?
-if [ $result -ne 0 ]; then
+
+if ! (git commit -am "Bumps crates" && git push); then
   cd "${CUR}" || exit
   exit $result
 fi
